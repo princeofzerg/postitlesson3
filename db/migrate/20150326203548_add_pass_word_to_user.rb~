@@ -1,0 +1,4 @@
+class AddPassWordToUser < ActiveRecord::Migration
+  def change
+  end
+end

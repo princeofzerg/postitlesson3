@@ -1,0 +1,4 @@
+class AddColumnToCommnets < ActiveRecord::Migration
+  def change
+  end
+end

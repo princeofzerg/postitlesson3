@@ -1,0 +1,48 @@
+rftt  <b><p>Title:</p></b><%= @post.title %>
+<b><p>Url:<p></b><%= link_to @post.url,fix_url(@post.url) %>
+<b><p>Description:</p></b><%= @post.description %>
+<p>Created at:</p><%= display_datetime(@post.created_at) %>
+<br>
+<b><p>Comments :</p></b>
+
+<% @post.reload.comments.each_with_index do |x,index| %>
+<div class="row">
+ <div class='span0 well text-center'>
+    <%= link_to vote_post_comment_path(x.post,x, vote: true), method: "post", remote: true do %>
+      <i class='icon-arrow-up'></i>
+    <% end %>
+    <br/>
+    <span id='comment_<%= @comment.id %>_votes'><%= x.total_votes %></span>
+    <br/>
+  
+    <%= link_to vote_post_comment_path(x.post,x, vote: false), method: "post", remote: true do %>
+      <i class='icon-arrow-down'></i>
+    <% end %>
+  </div> &nbsp &nbsp<%= x.body %>" 
+by <%= link_to x.username,user_path(x.user_id) %></div>
+</br>
+
+<% end %>
+<% if logged_in? %>   
+<%= form_for [@post, @comment] do |f| %>
+<%= f.text_area :body %>
+  <%= f.hidden_field :username, :value => current_user.username %>
+  <%= f.hidden_field :user_id, :value => current_user.id %>
+  <br>
+<%= f.submit "Create Comment" %>
+<% end %>
+<br/>
+<% else %>
+<form action = '/login'>
+  <input type = 'submit'  value= "Create Comment" />
+</form>
+<% end %>
+<div>
+<%= form_for @post do |f| %>
+ <%= f.label "Categories" %>
+  <%= f.collection_check_boxes :category_ids, Category.all, :id, :name do |cb| %>
+  <% cb.label(class:"checkbox inline"){cb.check_box(class: "checkbox") + cb.text} %>
+  <% end %>
+ <% end %> 
+</div>
+<%= link_to("Edit the Post",edit_post_path(@post)) %>

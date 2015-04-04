@@ -1,0 +1,2 @@
+<%= render "partials/errors" %>
+<%= render "partials/form" %>

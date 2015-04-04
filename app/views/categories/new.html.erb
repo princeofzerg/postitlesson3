@@ -1,0 +1,9 @@
+<%= render "partials/errors", obj: @category %>
+<p style='color:red'>
+<h2>New Cateogry:</h2>
+<%= form_for @category do |x| %>
+<%= x.label :name %>
+<%= x.text_field :name %>
+<br>
+<%= x.submit "Create a new category" %>
+<% end %>
