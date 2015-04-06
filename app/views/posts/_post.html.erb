@@ -6,7 +6,7 @@
       <i class='icon-arrow-up'></i>
     <% end %>
     <br/>
-    <span id = "post_<%= post.id %>_vote"><%= post.total_votes %></span>
+    <span id = "post_<%= post.slug %>_vote"><%= post.total_votes %></span>
     <br/>
   
     <%= link_to vote_post_path(post, vote: false), method: "post", remote: true do %>
@@ -15,7 +15,10 @@
   </div>
   <% end %> 
   <div class='span8 well'>
-    <%= render post.categories %>
+   <% post.categories.each do |category| %>
+   <%= link_to category.name, category_path(category) %>
+   <% end %> 
+
     <h4><%= link_to post.title, fix_url(post.url) %></h4>
     <p><%= post.description %> </p>
     <p>
@@ -24,7 +27,7 @@
     </p>
     <small>
     <span>
-      <%= link_to("#{post.comments.size} comments", post_path(post)) %>
+      <%= link_to("#{post.reload.comments.size} comments", post_path(post)) %>
     </span>
   </small>
   </div>

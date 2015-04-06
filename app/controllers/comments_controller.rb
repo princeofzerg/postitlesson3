@@ -2,8 +2,9 @@ class CommentsController < ApplicationController
 
   before_action :require_user
   def create
-   @post = Post.find(params[:post_id])
+    @post = Post.find_by slug: params[:post_id]
    @comment = @post.comments.build(params.require(:comment).permit(:body, :username,:user_id))
+   @comment.user = current_user
    
 
     if @comment.save
@@ -22,7 +23,7 @@ class CommentsController < ApplicationController
     
      @vote = Vote.create(voteable: @comment, user: current_user, vote: params[:vote])
       respond_to do |format|
-          format.html do|
+          format.html do
         if @vote.valid?
           flash[:notice] = 'Your vote was counted.'
         else
@@ -30,15 +31,13 @@ class CommentsController < ApplicationController
         end
         redirect_to :back
      end
-|
+
         format.js
+   end
   end
 
-  end    
+     
 
-  def new
-
-
-  end
+  
 end
    

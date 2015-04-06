@@ -7,6 +7,7 @@ class PostsController < ApplicationController
   	@posts = Post.all
   end
   def show
+      binding.pry
         @comment = @post.comments.new
   	@show_variable = 'Hi i am a show_variable'
   	
@@ -27,12 +28,12 @@ class PostsController < ApplicationController
      	
    def vote
    
-      @post = Post.find(params[:id])
+      @post = Post.find_by slug: params[:id]
           
      @vote = Vote.create(voteable: @post, user: current_user, vote: params[:vote])
      respond_to do |format|
         format.html do
-          if vote.valid?
+          if @vote.valid?
              flash[:notice] = 'Your vote was counted'
           else
              flash[:error] = "You can onlu vote on a post once"
@@ -60,7 +61,7 @@ class PostsController < ApplicationController
   
   def set_post
      
-    @post = Post.find(params[:id])
+     @post = Post.find_by slug: params[:id]
   end
   def update
     

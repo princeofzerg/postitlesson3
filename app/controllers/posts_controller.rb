@@ -7,6 +7,7 @@ class PostsController < ApplicationController
   	@posts = Post.all
   end
   def show
+  
         @comment = @post.comments.new
   	@show_variable = 'Hi i am a show_variable'
   	
@@ -27,7 +28,7 @@ class PostsController < ApplicationController
      	
    def vote
    
-      @post = Post.find(params[:id])
+      @post = Post.find_by slug: params[:id]
           
      @vote = Vote.create(voteable: @post, user: current_user, vote: params[:vote])
      respond_to do |format|
@@ -60,7 +61,7 @@ class PostsController < ApplicationController
   
   def set_post
      
-    @post = Post.find(params[:id])
+     @post = Post.find_by slug: params[:id]
   end
   def update
     

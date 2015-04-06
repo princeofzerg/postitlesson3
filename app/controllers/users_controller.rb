@@ -1,9 +1,10 @@
 class UsersController < ApplicationController
 
+  
  
  def show
-   @user= User.find(params[:id])
 
+ @user = User.find_by slug: params[:id]
  end 
  def new
    @user = User.new
@@ -28,9 +29,8 @@ class UsersController < ApplicationController
  def update
 
  end
-
- private
-
+ 
+ 
  def users_params
     params.require(:user).permit(:username,:password)
  end
