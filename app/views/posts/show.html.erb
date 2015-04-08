@@ -12,7 +12,7 @@ rftt  <b><p>Title:</p></b><%= @post.title %>
       <i class='icon-arrow-up'></i>
     <% end %>
     <br/>    
-    <span id='comment_<%= @comment.id %>_votes'><%= x.total_votes %></span>
+    <span id='comment_<%= x.id %>_votes'><%= x.total_votes %></span>
     <br/>
   
     <%= link_to vote_post_comment_path(x.post,x, vote: false), method: "post", remote: true do %>

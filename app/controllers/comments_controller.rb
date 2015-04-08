@@ -18,8 +18,8 @@ class CommentsController < ApplicationController
   
     	
   def vote
-     @comment = Comment.find(params[:id])
-      
+
+     @comment = Comment.find(params[:id])     
     
      @vote = Vote.create(voteable: @comment, user: current_user, vote: params[:vote])
       respond_to do |format|
@@ -31,8 +31,7 @@ class CommentsController < ApplicationController
         end
         redirect_to :back
      end
-
-        format.js
+     format.js
    end
   end
 

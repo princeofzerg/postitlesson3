@@ -23,11 +23,11 @@ class UsersController < ApplicationController
  end
  
  def edit
-
+      @user = User.find_by slug: params[:id]
  end 
  
  def update
-
+      @user = User.find_by slug: params[:id]
  end
  
  
