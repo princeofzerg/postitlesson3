@@ -6,7 +6,8 @@ class Post < ActiveRecord::Base
   	
 	validates :url, presence: true
  	
-        include Voteable
+        include voteable_loc2
+	  include Sluggable
 
          sluggable_column :title
    

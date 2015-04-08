@@ -1,5 +1,5 @@
 # Using Concerns
-module Voteable
+module Voteable_Loc5
   extend ActiveSupport::Concern
 
   included do
