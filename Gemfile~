@@ -9,6 +9,7 @@ gem 'bcrypt-ruby', '=3.0.1'
 gem 'tttlock', '=0.0.0'
 gem 'voteable_loc5', '=0.0.0'
 gem 'sluggable_loc', '=0.0.0'
+gem 'will_paginate', '~> 3.0.6'
 # See https://github.com/sstephenson/execjs#readme for more supported runtimes
 # gem 'therubyracer', platforms: :ruby
 
@@ -23,7 +24,7 @@ end
 group :development do
   gem 'quiet_assets'
   gem 'pry'
-  gem 'sqlite3'
+  gem 'pg'
 end
 
 group :production do
