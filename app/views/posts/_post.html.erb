@@ -1,34 +1,48 @@
+<div class = "post">
+  <div class="row">
+    <% if current_user %>
+    
+      <div class='span0 well text-center'>
+        <%= link_to vote_post_path(post, vote: true), method: "post", remote: true do %>
+          <i class='icon-arrow-up'></i>
+        <% end %>
 
-<div class="row">
-  <% if current_user %>
-  <div class='span0 well text-center'>
-    <%= link_to vote_post_path(post, vote: true), method: "post", remote: true do %>
-      <i class='icon-arrow-up'></i>
-    <% end %>
-    <br/>
-    <span id = "post_<%= post.slug %>_vote"><%= post.total_votes %></span>
-    <br/>
-  
-    <%= link_to vote_post_path(post, vote: false), method: "post", remote: true do %>
-      <i class='icon-arrow-down'></i>
-    <% end %>
-  </div>
-  <% end %> 
-  <div class='span8 well'>
-   <% post.categories.each do |category| %>
-   <%= link_to category.name, category_path(category) %>
-   <% end %> 
+        <br/>
+        <span id = "post_<%= post.slug %>_vote"><%= post.total_votes %></span>
+        <br/>
+      
+        <%= link_to vote_post_path(post, vote: false), method: "post", remote: true do %>
+          <i class='icon-arrow-down'></i>
+        <% end %>
 
-    <h4><%= link_to post.title, fix_url(post.url) %></h4>
-    <p><%= post.description %> </p>
-    <p>
-      <span class='quiet'>posted by</span> <%= link_to post.user.username, user_path(post.user) %>
-      <small>at <%= display_datetime(post.created_at) %></small>
-    </p>
-    <small>
-    <span>
-      <%= link_to("#{post.reload.comments.size} comments", post_path(post)) %>
-    </span>
-  </small>
+      </div>
+
+    <% end %> 
+
+    <div class='span8 well'>
+
+      <% post.categories.each do |category| %>
+        <span style = "background:dimgray;border-radius:35px;padding:4px"><%= link_to category.name, category_path(category) %></span>
+      <% end %> 
+
+      <h4><%= link_to post.title, fix_url(post.url) %></h4>
+      <p><%= post.description %> </p>
+      <p>
+        <span class='quiet'>posted by</span> <%= link_to post.user.username, user_path(post.user) %>
+        <small>at <%= display_datetime(post.created_at) %></small>
+      </p>
+      <small>
+      <span>
+        <%= link_to("#{post.reload.comments.size} comments", post_path(post)) %>
+      </span>
+      </small>
+         
+      <% if post.user == current_user %>
+       <span class="edit"><%= link_to "Edit", edit_post_path(post) %></span>
+      <% end %>
+
+    </div>
+
   </div>
+
 </div>

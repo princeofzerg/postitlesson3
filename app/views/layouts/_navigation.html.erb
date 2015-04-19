@@ -2,23 +2,93 @@
   <li>
     <%= link_to "Postit!", root_path, :class => 'brand' %>
   </li>
-  <li>
-    <%= link_to 'New Post', new_post_path %>
-  </li>
-  <li>
-    <%= link_to 'New Category', new_category_path %>
-  </li> 
-  <% if logged_in? %>
-   <li> Hi <%= current_user.username %> </li>
-   <li>
-      <%= link_to 'Log out', logout_path %>
-   </li>
-  <% else %>
-  <li>
-    <%= link_to 'Register', register_path %>
-  </li> 
-   <li>
-    <%= link_to 'Login', login_path %>
-  </li> 
-  <% end %>
 </ul>
+
+<div class='nav_item'>
+  <%= link_to "Hottest", posts_path(:sort => 'hottest'),class: 'btn btn-small' %>
+  
+</div>
+
+<div class='btn-group nav_item'>
+  <%= link_to '#', class: 'btn btn-small dropdown-toggle', 'data-toggle' => 'dropdown' do %>
+    Sorted by <span class='caret'></span>
+  <% end %>
+  <ul class='dropdown-menu'>   
+    <li>
+      <%= link_to "Newest", request.parameters.merge({:sort => "newest"}),method: "get", remote: true %>
+      <%= link_to "Oldest",  request.parameters.merge({:sort => "oldest"}),method: "get", remote: true %>
+    </li>
+  </ul>
+</div>
+
+<div class='btn-group nav_item'>
+  <%= link_to 'Newest Posts', posts_path, sort:"newest" %>
+</div>
+
+<div class='btn-group nav_item'>
+  <%= link_to '#', class: 'btn btn-small dropdown-toggle', 'data-toggle' => 'dropdown' do %>
+    Categories <span class='caret'></span>
+  <% end %>
+  <ul class='dropdown-menu'>
+    <% Category.all.each do |category| %>
+      <li>
+        <%= link_to category.name, category_path(category)%>
+      </li>
+    <% end %>
+    <% if logged_in? and current_user.admin? %>
+      <li class='divider'></li>
+
+      <li>
+        <%= link_to(new_category_path) do %>
+          <i class="icon-plus"></i>
+            New Category
+        <% end %>
+
+	      <%= link_to(categories_path) do %>
+          <i class="icon-plus"></i>
+          Edit Category
+        <% end %>
+
+      </li>
+    <% end %>
+  </ul>
+</div>
+
+<% if logged_in? %>
+  <div class='nav_item'>
+    <%= link_to 'New Post', new_post_path, class: 'btn btn-success btn-small' %>
+  </div>
+  <div class='btn-group nav_item'>
+    <%= link_to('', class: 'btn btn-small dropdown-toggle', 'data-toggle' => 'dropdown') do %>
+      <%= current_user.username %>
+      <span class='caret'></span>
+    <% end %>
+    <ul class='dropdown-menu'>
+      <li>
+        <%= link_to edit_user_path(current_user) do %>
+          <i class='icon-pencil'></i>
+          edit profile
+        <% end %>
+      </li>
+      <li>
+        <%= link_to user_path(current_user) do %>
+          <i class='icon-user'></i>
+          view profile
+        <% end %>
+      </li>
+      <li>
+        <%= link_to logout_path do %>
+          <i class='icon-circle-arrow-left'></i>
+          logout
+        <% end %>
+      </li>
+    </ul>
+  </div>
+<% else # logged out%>
+  <div class='nav_item'>
+    <%= link_to 'Register', register_path, class: 'btn btn-success btn-small' %>
+  </div>
+  <div class='nav_item'>
+    <%= link_to 'Log in', login_path, class: 'btn btn-small' %>
+  </div>
+<% end %>

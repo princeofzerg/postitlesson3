@@ -1,0 +1,5 @@
+$('.post').remove();
+
+<% @posts.each do |post|  %>
+  $('.posts').append('<%= j render "post", post: post %>');
+<% end %>

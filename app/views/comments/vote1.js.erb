@@ -1,6 +1,0 @@
-<% if @vote.valid? %>
-$('#comment_<%= @comment.id %>_vote').html("<%= @comment.total_votes %> votes")
-
-<% else %>
-alert("You already votes on that")
-<% end %>

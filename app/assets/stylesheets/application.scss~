@@ -35,7 +35,7 @@ color:white
 
 font-size:12px;
 color:grey;
-padding-left:15px;
+padding-left:5px;
 
 }
 .span8.well > small > span > a {color:grey}

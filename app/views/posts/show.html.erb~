@@ -1,4 +1,4 @@
-rftt  <b><p>Title:</p></b><%= @post.title %>
+  <b><p>Title:</p></b><%= @post.title %>
 <b><p>Url:<p></b><%= link_to @post.url,fix_url(@post.url) %>
 <b><p>Description:</p></b><%= @post.description %>
 <p>Created at:</p><%= display_datetime(@post.created_at) %>
@@ -12,14 +12,14 @@ rftt  <b><p>Title:</p></b><%= @post.title %>
       <i class='icon-arrow-up'></i>
     <% end %>
     <br/>    
-    <span id='comment_<%= @comment.id %>_votes'><%= x.total_votes %></span>
+    <span id='comment_<%= x.id %>_votes'><%= x.total_votes %></span>
     <br/>
   
     <%= link_to vote_post_comment_path(x.post,x, vote: false), method: "post", remote: true do %>
       <i class='icon-arrow-down'></i>
     <% end %>
   </div> &nbsp &nbsp<%= x.body %>" 
-by <%= link_to x.username,user_path(x.reload.user) %></div>
+by <%= link_to x.user.username,user_path(x.reload.user) %></div>
 </br>
 
 <% end %>
@@ -45,4 +45,4 @@ by <%= link_to x.username,user_path(x.reload.user) %></div>
   <% end %>
  <% end %> 
 </div>
-<%= link_to("Edit the Post",edit_post_path(@post)) %>
+

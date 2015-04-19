@@ -1,4 +1,6 @@
-<h5>Category:</h5>
-<p>Name:<%= @category.name %> </p>
-<p>ID :<%= @category.id %></p>
-<%= link_to("Edit the Category",edit_category_path(@category)) %>
+ <% header = link_to('All Posts', posts_path) + " &raquo; #{@category.name}".html_safe %>
+<%= render 'shared/content_title', title: header  %>
+
+<% @categories.each do |post| %>
+  <%= render 'posts/post', post: post %>
+<% end %>

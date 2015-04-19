@@ -1,0 +1,5 @@
+$('.post').remove();
+
+<% @posts.each do |post| 
+  $('.posts').append('<h2>SSSSSSS</h2>');
+<% end %>

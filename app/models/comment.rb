@@ -1,12 +1,8 @@
 class Comment < ActiveRecord::Base
-	 include Voteable_Loc2
+	
+	include Voteable_Loc5
 	belongs_to :user
 	belongs_to :post
-	validates :body, presence: true
-	
-
- 
- 
-   
+	validates :body, presence: true  
    
 end

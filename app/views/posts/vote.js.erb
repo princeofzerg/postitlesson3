@@ -1,6 +1,6 @@
 <% if @vote.valid? %>
-$('#post_<%= @post.slug %>_vote').html("<%= @post.total_votes %> votes")
+	$('#post_<%= @post.slug %>_vote').html("<%= @post.total_votes %> votes")
 
 <% else %>
-alert("You already votes on that")
+	alert("You already votes on that")
 <% end %>

@@ -1,8 +1,7 @@
 class SessionsController < ApplicationController
-   def new
-        render 'new'
-   end
-
+  def new
+    render 'new'
+  end
 
   def create
     user = User.where(username: params[:username]).first

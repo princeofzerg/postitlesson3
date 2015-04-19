@@ -9,5 +9,6 @@
       <%= f.label :password %>
       <%= f.password_field :password %>
     </div>
-  <% end %>
+    <%= f.submit (@user.new_record? ? "Register" : "Update Profile"), class: 'btn btn-success' %>
+    <% end %>
 </div>    

@@ -21,7 +21,24 @@ def edit
 end
 
 def show
-   @category = Category.find_by slug: params[:id]
+    @category = Category.find_by slug: params[:id]
+
+ 
+       case params[:sort]
+       
+        when "newest"
+         @categories = @category.posts.order('created_at DESC').all       
+	else
+           @categories = @category.posts     
+        end       
+      respond_to do |format|
+            format.html do
+              @categories
+
+            end
+               format.js
+
+          end
 end
 
 def new

@@ -1,4 +1,4 @@
-
+<div class = "post">
 <div class="row">
   <% if current_user %>
   <div class='span0 well text-center'>
@@ -16,7 +16,7 @@
   <% end %> 
   <div class='span8 well'>
    <% post.categories.each do |category| %>
-   <%= link_to category, category_path(category) %>
+   <span style = "background:dimgray;border-radius:35px;padding:4px"><%= link_to category.name, posts_path(category.slug) %></span>
    <% end %> 
 
     <h4><%= link_to post.title, fix_url(post.url) %></h4>
@@ -30,5 +30,13 @@
       <%= link_to("#{post.reload.comments.size} comments", post_path(post)) %>
     </span>
   </small>
+       
+    <% if post.user == current_user %>
+     <span class="edit"><%= link_to "Edit", edit_post_path(post) %></span>
+
+
+
+     <% end %>
   </div>
+</div>
 </div>

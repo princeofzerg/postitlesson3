@@ -4,9 +4,9 @@ class Category < ActiveRecord::Base
 	validates :name, presence: true
 
 
-          include Sluggable
+  include Sluggable_Loc
 
-         sluggable_column :name
+  sluggable_column :name
    
    
 

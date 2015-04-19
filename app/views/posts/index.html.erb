@@ -1,5 +1,10 @@
+
 <%= render 'shared/content_title', title: 'All Posts' %>
 
-<% @posts.each do |post| %>
-  <%= render 'post', post: post %>
-<% end %>
+<div class="posts">
+	<% @posts.each do |post| %>
+	  <%= render 'post', post: post %>
+	<% end %>
+</div>
+
+<%= will_paginate @posts %>
