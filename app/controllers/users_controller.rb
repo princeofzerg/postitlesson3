@@ -1,7 +1,6 @@
 class UsersController < ApplicationController 
-  before_action :require_user, except: [:show, :index] 
-  before_action :set_user , only: [:edit,:show,:update]
-
+  before_action :set_user, only: [:show, :edit, :update]
+  before_action :require_same_user, only: [:edit, :update]
   def index
 
   end
@@ -11,6 +10,8 @@ class UsersController < ApplicationController
 
   def new
     @user = User.new
+    
+    render "new"
   end
  
   def create
@@ -48,5 +49,11 @@ class UsersController < ApplicationController
     params.require(:user).permit(:username,:password,:time_zone)
   end
  
+   def require_same_user
+    if current_user != @user
+      flash[:error] = "You're not allowed to do that."
+      redirect_to root_path
+    end
+  end
 end  
 
