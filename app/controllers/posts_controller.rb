@@ -1,18 +1,18 @@
 require 'will_paginate/array'
 class PostsController < ApplicationController
-require 'will_paginate/array'
+
 	before_action :set_post , only: [:edit,:show,:update]
 	before_action :require_user, except: [:show, :index] 
 		 
 	def index
-		require 'will_paginate/array'
+		
 	  	case params[:sort]
 				when "hottest"
 					@posts = Post.all.sort_by{|post| -post.comments.size}.paginate(:page => params[:page], :per_page => 10)
-				when "newest"
-					@posts = Post.order('created_at DESC').paginate(:page => params[:page], :per_page => 10)       
+				when "oldest"
+					@posts = Post.order('created_at ASC').paginate(:page => params[:page], :per_page => 10)       
 				else        
-					@posts = Post.order('created_at ASC').paginate(:page => params[:page], :per_page => 10)
+					@posts = Post.order('created_at DESC').paginate(:page => params[:page], :per_page => 10)           
 			end      
 									 
 				respond_to do |format|
